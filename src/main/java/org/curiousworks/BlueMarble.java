@@ -4,29 +4,38 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
 public class BlueMarble {
-	
+
 	private String API_KEY = "7u1nv3v73ROS0u2F65J7w14pnGpjzwCv6cruBzes";
 	private String dateAsString;
 	private String quality = "natural";
 	private String caption;
 	private String nasaImageName;
+	private String localDateAsString = LocalDate.now().toString();
+	private String enhancedTimestamp = "2018-6-1";
 
 	public static InputStream getMostRecentImage() {
 		BlueMarble blueMarble = new BlueMarble();
 		blueMarble.setDate(LocalDate.now().minusDays(1).toString());
 		return blueMarble.getImage();
 	}
-	
+
 	public void setDate(String date) {
 		this.dateAsString = date;
 	}
-	
+
+
+
 	public InputStream getImage() {
 		try {
 			getMetaData();
